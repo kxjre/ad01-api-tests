@@ -18,7 +18,7 @@ module.exports = defineConfig({
     },
   },
   env: {
-    base_url: "https://www.rijksmuseum.nl/api/nl/collection/",
-    api_key: "0fiuZFh4"
+    BASE_URL: "https://www.rijksmuseum.nl/api/nl/collection/",
+    API_KEY: "0fiuZFh4"
   }
 });

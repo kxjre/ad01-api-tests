@@ -1,6 +1,6 @@
 const cache = {};
-export const API_KEY = Cypress.env('api_key');
-export const BASE_URL = Cypress.env('base_url');
+export const API_KEY = Cypress.env('API_KEY');
+export const BASE_URL = Cypress.env('BASE_URL');
 
 export function fetchCollection(query = '') {
     if (cache[query]) return cy.wrap(cache[query]);
