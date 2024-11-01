@@ -1,10 +1,7 @@
-name: Run tests on push 
+name: Run Api Tests
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
   test:
