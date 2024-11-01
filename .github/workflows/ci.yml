@@ -27,9 +27,3 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run
-
-      - name: Upload Cypress Reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-report
-          path: cypress/reports/**
