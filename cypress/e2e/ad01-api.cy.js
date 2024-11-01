@@ -1,13 +1,13 @@
-import { apiKey, fetchCollection, fetchArtObject } from '../support/ad01_helpers';
+import { API_KEY, BASE_URL, fetchCollection, fetchArtObject } from '../support/ad01_helpers';
 
 describe('Rijksmuseum API Tests', () => {
     
     it('GET Collection Metadata - Check Status and Content', () => {
       cy.request({
         method: 'GET',
-        url: Cypress.env('base_url'),
+        url: BASE_URL,
         qs: {
-          key: Cypress.env('api_key'),
+          key: API_KEY,
           format: 'json'
         }
       }).then((response) => {
@@ -21,12 +21,13 @@ describe('Rijksmuseum API Tests', () => {
       
       cy.request({
         method: 'GET',
-        url: Cypress.env('base_url') + `${objectNumber}`,
+        url: BASE_URL + `${objectNumber}`,
         qs: {
-          key: Cypress.env('api_key'),
+          key: API_KEY,
           format: 'json'
         }
       }).then((response) => {
+        cy.logResponse(response);
         expect(response.status).to.eq(200);
         expect(response.body).to.have.property('artObject');
         expect(response.body.artObject).to.have.property('objectNumber', objectNumber);
@@ -100,9 +101,9 @@ describe('Rijksmuseum API Tests', () => {
     it('GET Collection Metadata - Validate Pagination by Limiting Results per Page', () => {
       cy.request({
         method: 'GET',
-        url: Cypress.env('base_url'),
+        url: BASE_URL,
         qs: {
-          key: Cypress.env('api_key'),
+          key: API_KEY,
           format: 'json',
           ps: 5 // Limit results to 5 per page
         }

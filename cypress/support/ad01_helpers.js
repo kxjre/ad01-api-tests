@@ -1,13 +1,15 @@
 const cache = {};
+export const API_KEY = Cypress.env('api_key');
+export const BASE_URL = Cypress.env('base_url');
 
 export function fetchCollection(query = '') {
     if (cache[query]) return cy.wrap(cache[query]);
 
     return cy.request({
         method: 'GET',
-        url: Cypress.env('base_url'),
+        url: BASE_URL,
         qs: {
-            key: Cypress.env('api_key'),
+            key: API_KEY,
             format: 'json',
             q: query
         }
@@ -22,9 +24,9 @@ export function fetchArtObject(objectNumber) {
 
     return cy.request({
         method: 'GET',
-        url: Cypress.env('base_url') + `${objectNumber}`,
+        url: BASE_URL + `${objectNumber}`,
         qs: {
-            key: Cypress.env('api_key'),
+            key: API_KEY,
             format: 'json'
         }
     }).then((response) => {
