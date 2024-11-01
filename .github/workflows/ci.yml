@@ -1,0 +1,36 @@
+name: CI Pipeline for AD01 Assesment 
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [22.11.0]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress Tests with Report
+        run: npm run test
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: cypress/reports
